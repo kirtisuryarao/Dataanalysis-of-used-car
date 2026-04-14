@@ -27,12 +27,8 @@ sns.set(style="white")
 # In[20]:
 
 # absolute path till parent folder
-abs_path = os.getcwd()
-path_array = abs_path.split("/")
-path_array = path_array[:len(path_array)-1]
-homefolder_path = ""
-for i in path_array[1:]:
-    homefolder_path = homefolder_path + "/" + i   
+abs_path = os.path.dirname(os.path.abspath(__file__))
+homefolder_path = os.path.dirname(abs_path)
 
 
 # In[22]:
@@ -87,8 +83,8 @@ fig.savefig(abs_path + "/Plots/price-vehicleType-boxplot.png")
 
 # Count plot to show the number of vehicles belonging to each vehicleType
 sns.set_style("white")
-g = sns.factorplot(x="vehicleType", data=df, kind="count",
-                   palette="BuPu", size=6, aspect=1.5)
+g = sns.catplot(x="vehicleType", data=df, kind="count",
+                   palette="BuPu", height=6, aspect=1.5)
 # to get the counts on the top heads of the bar
 for p in g.ax.patches:
     g.ax.annotate((p.get_height()), (p.get_x()+0.1, p.get_height()+500))
